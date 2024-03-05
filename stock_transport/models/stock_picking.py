@@ -10,14 +10,14 @@ class StockPicking(models.Model):
     volume = fields.Float(compute="_compute_picking_volume",string="Volume")
     weight = fields.Float(compute="_compute_picking_weight",string="weight")
 
+    @api.depends('product_id','move_ids')
     def _compute_picking_volume(self):
         for record in self:
-            record.volume=0
-            for product in record.move_ids:
-                record.volume+=product.product_id.volume*product.quantity
-    
+            record.volume=sum(product.product_id.volume*product.quantity for product in record.move_ids)
+          
+    @api.depends('product_id','move_ids')
     def _compute_picking_weight(self):
         for record in self:
-            record.weight=0
-            for product in record.move_ids:
-                record.weight+=product.product_id.weight*product.quantity
+            record.weight=sum(product.product_id.weight*product.quantity for product in record.move_ids)
+            
+                

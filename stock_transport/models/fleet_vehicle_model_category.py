@@ -10,7 +10,7 @@ class FleetVehicleModelCategory(models.Model):
     max_weight=fields.Integer(string="Max Weight")
     max_volume=fields.Integer(string="Max Volume")
 
-    @api.depends("max_weight","max_volume")
+    @api.depends("name","max_weight","max_volume")
     def _compute_display_name(self):
-        for record in self:
-         record.display_name = record.name + ' (' + str(record.max_weight) + ',' + str(record.max_volume) + ')'
+       for record in self:
+            record.display_name = f"{record.name} ({record.max_weight}Kg) ({record.max_volume}m\u00b3)"
