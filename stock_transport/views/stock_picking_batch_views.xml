@@ -9,8 +9,22 @@
                 <field name="dock_id"/>
                 <field name="vehicle_id" placeholder="Third Party Provider"/>
                 <field name="vehicle_category_id" placeholder="eg-Semi-truck"/>
-                <field name="volume" widget="progressbar" invisible="not vehicle_category_id"/>
-                <field name="weight" widget="progressbar" invisible="not vehicle_category_id"/>
+                <label for='weight' string="weight" invisible="not vehicle_category_id"/>
+                <div class="d-flex" invisible="not vehicle_category_id">
+                    <div class='d-flex flex-row gap-1'>
+                        <field name='total_weight' nolabel='1'/>
+                        <span>kg</span>
+                    </div>
+                    <field name='weight' widget='progressbar' nolabel='1' />
+                </div>
+                <label for='volume' string="Volume" invisible="not vehicle_category_id"/>
+                <div class="d-flex" invisible="not vehicle_category_id">
+                    <div class='d-flex flex-row gap-1'>
+                        <field name='total_volume' nolabel='1'/>
+                        <span >&#13221; </span>
+                    </div>
+                    <field name='volume' widget='progressbar' nolabel='1' />
+                </div>
             </xpath>
         </field>
     </record>
